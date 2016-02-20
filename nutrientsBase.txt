@@ -1,0 +1,77 @@
+##############################################################
+Energy
+Protein
+#Adjusted Protein
+Total lipid (fat)
+Carbohydrate, by difference
+Starch
+Sugars, total
+Fiber, total dietary
+Fatty acids, total trans
+Fatty acids, total saturated
+Fatty acids, total monounsaturated
+Fatty acids, total polyunsaturated
+Cholesterol
+##############################################################
+# minerals
+Calcium, Ca
+Iron, Fe
+Magnesium, Mg
+Phosphorus, P
+Potassium, K
+Sodium, Na
+Zinc, Zn
+Copper, Cu
+Fluoride, F
+Manganese, Mn
+Selenium, Se
+##############################################################
+# vitamins
+Vitamin A, IU
+# animal for of Vitamin A
+Retinol
+Vitamin A, RAE
+# carotene is a precursor to vitamin A
+Carotene, beta
+Carotene, alpha
+Vitamin E (alpha-tocopherol)
+Vitamin D
+Vitamin D2 (ergocalciferol)
+Vitamin D3 (cholecalciferol)
+Vitamin D (D2 + D3)
+Lutein + zeaxanthin
+Vitamin C, total ascorbic acid
+Thiamin
+Riboflavin
+Niacin
+Pantothenic acid
+Vitamin B-6
+Folate, total
+Vitamin B-12
+Choline, total
+Menaquinone-4
+Vitamin K (phylloquinone)
+Betaine
+Tryptophan
+Threonine
+Isoleucine
+Leucine
+Lysine
+Methionine
+Cystine
+Phenylalanine
+Tyrosine
+Valine
+Arginine
+Histidine
+Alanine
+Aspartic acid
+Glutamic acid
+##############################################################
+# other
+Cryptoxanthin, beta
+# lycopene is chemically a carotene, it has no vitamin A activity
+Lycopene
+##############################################################
+# bad substances
+Dihydrophylloquinone
