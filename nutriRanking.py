@@ -1,55 +1,8 @@
 import nltk, re, string
 import numpy as np
 import sqlite3, ipdb
-
-from nltk.stem.lancaster import *
-st = LancasterStemmer()
-
-class Nutrient(object):
-  def __init__(self, nutriDef, nutriData):
-    self.nutriDef = nutriDef
-    self.nutriData = nutriData
-  def GetValue(self):
-    return float(self.nutriData[2])
-  def GetUnit(self):
-    return self.nutriDef[1].encode("utf-8")
-  def GetName(self):
-    return self.nutriDef[3]
-
-class FoodItem(object):
-  def __init__(self, foodDesc):
-    self.foodDesc = foodDesc
-    self.longDesc = re.sub('['+string.punctuation+']', '', foodDesc[2])
-    self.tokens = [st.stem(word) for word in nltk.word_tokenize(self.longDesc)]
-    self.nutrients = dict()
-
-  def GetDescription(self):
-    return self.foodDesc[2]
-
-  def GetTFIDF(self, bowTerms, df):
-    self.tf = np.array(BOW(self.tokens, bowTerms))
-    self.tfidf = np.nan_to_num(self.tf/df)
-#    print 'len', np.sqrt((self.tfidf**2).sum())
-    self.tfidf /= np.sqrt((self.tfidf**2).sum())
-    return self.tfidf
-
-  def ComputeTFIDFangle(self, foodB, bowTerms, df):
-    tfA = self.GetTFIDF(bowTerms, df)
-    tfB = foodB.GetTFIDF(bowTerms, df)
-    return np.arccos(min(1.,max(-1.,tfA.dot(tfB))))*180./np.pi
-
-  def AddNutrient(self, nutrient):
-    self.nutrients[nutrient.GetName()] = nutrient
-  def GetNutrient(self, nutrientName):
-    return self.nutrients[nutrientName]
-
-def BOW(tokens, bowTerms):
-    document = nltk.Text(tokens)
-    tf = [] # term frequency; how often does the word occur in this doc
-    for i,word in enumerate(bowTerms):
-        count = document.count(word)
-        tf.append(count)
-    return tf
+from nutrient import *
+from foodItem import *
 
 bowTerms = []
 df = []
@@ -58,21 +11,10 @@ with open("./unique_terms.txt", "r") as f:
   df = np.array([float(dfw) for dfw in f.readline().split(" ")])
 print "read {} unique BOW terms.".format(len(bowTerms))
 
-nutrientFilter = []
 filterFile = "./nutrientsBase.txt"
-with open(filterFile) as f:
-  for line in f:
-    if not line[0] == "#":
-      nutrientFilter.append(line[:-1])
-#nutrientFilter = nutrientFilter[:2]
-
 conn = sqlite3.connect("sr28asc.db")
 c = conn.cursor()
-c.execute('SELECT * FROM NUTR_DEF')
-nutris = dict()
-for n in c.fetchall():
-  if n[3] in nutrientFilter:
-    nutris[n[3]] = n
+nutrientFilter, nutris = GetNutrients(c, filterFile)
 
 printDistMatrix = True
 matchThrA = 88.
