@@ -128,7 +128,9 @@ for nutrient in nutrientFilter:
     np.set_printoptions(precision=2, suppress=True)
     print D
 
+print "<ul>"
 for nutrient in nutrientFilter:
+  print '<li>[expand title="{}"]'.format(nutrient)
   print '[table class="table-condensed" caption="{}" width="100%" colalign="center|center|left"]'.format(nutrient)
   print "rank, amount, food description"
   for rank,rankedFood in enumerate(ranking[nutrient]):
@@ -137,5 +139,6 @@ for nutrient in nutrientFilter:
     unit = food.GetNutrient(nutrient).GetUnit()
     print "{}, {}{}, {}".format(rank+1,value, unit,
         re.sub(",",";",food.GetDescription())) 
-  print "[/table]"
+  print "[/table][/expand]</li>"
+print "</ul>"
 conn.close()

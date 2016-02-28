@@ -8,7 +8,9 @@ nutrition database](http://ndb.nal.usda.gov/).
    [./unique_terms.txt](http://jstraub.de/download/nutriDB/unique_terms.txt).
 - [nutriRanking](nutriRanking.py) uses the SQLite DB as well as the
   term frequency file to compute a decluttered ranking of food items
-  for each nutrient in [nutrientsBase.txt](./nutrientsBase.txt).
+  for each nutrient in [nutrientsBase.txt](./nutrientsBase.txt). The
+  results of this script can be found on my
+  [blog](http://www.jstraub.de/top-10-foods-per-nutrient/).
 
 The USDA DB parser was inspired by the following projects:
 [nutrient-db](https://github.com/schirinos/nutrient-db),
